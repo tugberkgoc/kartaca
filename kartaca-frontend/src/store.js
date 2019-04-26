@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     chats: null,
     handle: ""
   },
+  plugins: [createPersistedState()],
   getters: {
     NAME: state => {
       return state.NAME
@@ -29,8 +31,9 @@ export default new Vuex.Store({
     SET_NAME: (state, payload) => {
       state.NAME = payload
     },
-    SET_NAME_EMPTY: (state) => {
-      state.NAME = ''
+    SET_EMPTY: (state, payload) => {
+      state.NAME = payload;
+      state.EMAIL = payload;
     },
     SET_EMAIL: (state, payload) => {
       state.EMAIL = payload
@@ -84,6 +87,9 @@ export default new Vuex.Store({
     },
     SET_HANDLE: (context, payload) => {
       context.commit("SET_HANDLE", payload);
+    },
+    SET_EMPTY_STORE: (context, payload) => {
+      context.commit("SET_EMPTY", payload);
     }
   },
 });

@@ -22,9 +22,9 @@
               <em v-if="NAME === ''">Login / Sign Up</em>
               <em v-if="NAME !== ''"> Log Out</em>
             </template>
-            <b-dropdown-item v-if="NAME !== ''" href="/" v-on:click="logOut">Log Out</b-dropdown-item>
-            <b-dropdown-item v-if="NAME === ''" href="/login">Login</b-dropdown-item>
-            <b-dropdown-item v-if="NAME === ''" href="/register">Sign Up</b-dropdown-item>
+            <b-dropdown-item v-if="NAME !== ''" v-on:click="logOut">Log Out</b-dropdown-item>
+            <b-dropdown-item v-if="NAME === ''" to="/login">Login</b-dropdown-item>
+            <b-dropdown-item v-if="NAME === ''" to="/register">Sign Up</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -43,7 +43,8 @@
       mapState(['NAME']),
     methods:{
       logOut(){
-        this.$store.dispatch("SET_NAME_EMPTY");
+        this.$store.dispatch("SET_EMPTY_STORE", '');
+        this.$router.push({path: '/'})
       },
       goToHomePage() {
         this.$router.push({path: '/'})
